@@ -3,7 +3,6 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 # Create your models here.
 class MyAccountMnager(BaseUserManager):
-
     # creating for normal user
     def create_user(self, f_name, l_name, username, email, password=None):
         if not email:
@@ -47,7 +46,7 @@ class Account(AbstractBaseUser):
     l_name = models.CharField(max_length=200)
     email = models.EmailField(unique=True, max_length=200)
     username = models.CharField(unique=True, max_length=200)
-    phone_number = models.CharField(max_length=50)
+    ph_number = models.CharField(max_length=50)
 
     # required
     date_joined = models.DateTimeField(auto_now_add=True)
