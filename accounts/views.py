@@ -8,6 +8,7 @@ from .models import Account
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
+        print('its working')
         if form.is_valid():
             f_name = form.cleaned_data['f_name']
             l_name = form.cleaned_data['l_name']
@@ -19,6 +20,8 @@ def register(request):
                                                password=password)
             user.ph_number = ph_number
             user.save()
+        return redirect('home')
+            
     else:
         form = RegistrationForm()
     dict = {
