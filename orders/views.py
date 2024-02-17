@@ -101,12 +101,21 @@ def place_order(request, total=0, quantity=0,):
         return redirect('store')
 
     grand_total = 0
-    tax = 0
+
+       
     for cart_item in cart_items:
-        total += (cart_item.product.price * cart_item.quantity)
+        # total += (cart_item.product.price * cart_item.quantity)
         quantity += cart_item.quantity
-    tax = (2 * total)/100
-    grand_total = total + tax
+
+        if cart_item.product.variations == 'small':
+            grand_total += cart_item.quantity * cart_item.product.price
+        elif cart_item.product.variations == 'medium':
+            grand_total += cart_item.quantity * cart_item.product.price_medium
+        else:
+            grand_total += cart_item.quantity * cart_item.product.price_large
+
+        print(grand_total)
+    # grand_total = total + tax
 
     if request.method == 'POST':
         form = OrderForm(request.POST)
@@ -125,7 +134,7 @@ def place_order(request, total=0, quantity=0,):
             data.city = form.cleaned_data['city']
             data.order_note = form.cleaned_data['order_note']
             data.order_total = grand_total
-            data.tax = tax
+            # data.tax = tax
             data.ip = request.META.get('REMOTE_ADDR')
             data.save()
             # Generate order number
@@ -143,7 +152,7 @@ def place_order(request, total=0, quantity=0,):
                 'order': order,
                 'cart_items': cart_items,
                 'total': total,
-                'tax': tax,
+                # 'tax': tax,
                 'grand_total': grand_total,
                 'g_total': grand_total * 100,
             }
