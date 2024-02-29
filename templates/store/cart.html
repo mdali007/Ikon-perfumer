@@ -4,8 +4,16 @@
 {% block content %}
 
 
-<section class="section-content padding-y bg">
-<div class="container">
+<div id="page-content">
+
+
+		<!--Page Title-->
+    	<div class="page section-header text-center">
+			<div class="page-title">
+        		<div class="wrapper"><h1 class="page-width">Your cart</h1></div>
+      		</div>
+		</div>
+        <!--End Page Title-->
 
 <!-- ============================ COMPONENT 1 ================================= -->
 {% if not cart_items %}
@@ -21,7 +29,7 @@
 <table class="table table-borderless table-shopping-cart">
 <thead class="text-muted">
 <tr class="small text-uppercase">
-  <th scope="col">Product</th>
+  <th scope="col" width="300">Product</th>
   <th scope="col" width="120">Quantity</th>
   <th scope="col" width="120">Price</th>
   <th scope="col" class="text-right" width="200"> </th>
@@ -39,7 +47,7 @@
 				<p class="text-muted small">
 					{% if cart_item.variations.all %}
 						{% for item in cart_item.variations.all %}
-							{{ item.variation_category | capfirst }} : {{ item.variation_value | capfirst }} <br>
+							{{ item.variation_category | capfirst }} : {{ item.variation_value | capfirst }} <br><hr>
 						{% endfor %}
 					{% endif %}
 				</p>
@@ -73,7 +81,7 @@
 		</div> <!-- price-wrap .// -->
 	</td>
 	<td class="text-right">
-	<a href="{% url 'remove_cart_item' cart_item.product.id cart_item.id %}" onclick="return confirm('Are you sure you want to delete this item?')" class="btn btn-danger"> Remove</a>
+	<a href="{% url 'remove_cart_item' cart_item.product.id cart_item.id %}" onclick="return confirm('Are you sure you want to delete this item?')" class="btn btn-danger"> X</a>
 	</td>
 </tr>
 {% endfor %}
@@ -88,23 +96,22 @@
 		<div class="card">
 		<div class="card-body">
 			<dl class="dlist-align">
-			  <dt>Total price:</dt>
-			  <dd class="text-right">$ {{total}}</dd>
-			</dl>
-			<dl class="dlist-align">
+				<div class="cart__shipping">Shipping &amp; taxes calculated at checkout</div>
+			</dl> <hr>
+			<!-- <dl class="dlist-align">
 			  <dt>Tax:</dt>
 			  <dd class="text-right"></dd>
-			</dl>
+			</dl> -->
 			<dl class="dlist-align">
 			  <dt>Grand Total:</dt>
 			  <dd class="text-right text-dark b"><strong>$ {{grand_total}}</strong></dd>
 			</dl>
 			<hr>
 			<p class="text-center mb-3">
-				<img src="{% static './images/misc/payments.png' %}" height="26">
+				<div class="paymnet-img"><img src="{% static 'images/payment-img.jpg' %}" alt="Payment"></div>
 			</p>
-			<a href="{% url 'checkout' %}" class="btn btn-primary btn-block"> Checkout </a>
-			<a href="{% url 'store' %}" class="btn btn-light btn-block">Continue Shopping</a>
+			<a href="{% url 'checkout' %}" class="btn btn--small-wide checkout"> Checkout </a>
+			<a href="{% url 'store' %}" class="btn btn--small-wide checkout">Continue Shopping</a>
 		</div> <!-- card-body.// -->
 		</div> <!-- card.// -->
 
@@ -115,8 +122,8 @@
 {% endif %}
 <!-- ============================ COMPONENT 1 END .// ================================= -->
 
-</div> <!-- container .//  -->
-</section>
+
+</div>
 <!-- ========================= SECTION CONTENT END// ========================= -->
 
 {% endblock %}

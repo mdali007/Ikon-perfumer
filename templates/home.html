@@ -5,9 +5,9 @@
 {% block content %}
 
 
-
+<div id="page-content">
 <!-- ========================= SECTION MAIN ========================= -->
-<section class="section-intro padding-y-sm">
+
 <!--<div class="container"> -->
 
 	<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -29,44 +29,145 @@
 	  </div>
 
 <!-- </div>  container //  -->
-</section>
+
 <!-- ========================= SECTION MAIN END// ========================= -->
 
 <!-- ========================= SECTION  ========================= -->
-<section class="section-name padding-y-sm">
-<div class="container">
-
-<header class="section-heading">
-	<a href="{% url 'store' %}" class="btn btn-outline-primary float-right">See all</a>
-	<h3 class="section-title">Popular products</h3>
-</header><!-- sect-heading -->
 
 
-<div class="row">
-	{% for product in products %}
-	<div class="col-md-3">
-		<div class="card card-product-grid">
-			<a href="{{ product.get_url }}" class="img-wrap"> <img src="{{ product.images.url }}"> </a>
-			<figcaption class="info-wrap">
-				<a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>
-				<div class="price mt-1">$ {{ product.price }}</div> <!-- price-wrap.// -->
-				<div class="rating-star">
-					<span>
-						<i class="fa fa-star{% if product.averageReview < 0.5 %}-o{% elif product.averageReview >= 0.5 and product.averageReview < 1 %}-half-o {% endif %}" aria-hidden="true"></i>
-						<i class="fa fa-star{% if product.averageReview < 1.5 %}-o{% elif product.averageReview >= 1.5 and product.averageReview < 2 %}-half-o {% endif %}" aria-hidden="true"></i>
-						<i class="fa fa-star{% if product.averageReview < 2.5 %}-o{% elif product.averageReview >= 2.5 and product.averageReview < 3 %}-half-o {% endif %}" aria-hidden="true"></i>
-						<i class="fa fa-star{% if product.averageReview < 3.5 %}-o{% elif product.averageReview >= 3.5 and product.averageReview < 4 %}-half-o {% endif %}" aria-hidden="true"></i>
-						<i class="fa fa-star{% if product.averageReview < 4.5 %}-o{% elif product.averageReview >= 4.5 and product.averageReview < 5 %}-half-o {% endif %}" aria-hidden="true"></i>
-						</span>
+	<div class="section">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="section-header text-center">
+						<h2 class="h2">Bestseller</h2>
+						<p>Our most popular products based on sales</p>
+					</div>
+					<div class="productSlider grid-products">
+						{% for product in products %}
+						<div class="col-12 item">
+							
+							<!-- start product image -->
+							<div class="product-image">
+								<!-- start product image -->
+								<a href="{{ product.get_url }}" class="grid-view-item__link">
+									<!-- image -->
+									<img class="primary blur-up lazyload" data-src="{{ product.images.url }}" src="{{ product.images.url }}" alt="image" title="product">
+									<!-- End image -->
+									<!-- Hover image -->
+									<img class="hover blur-up lazyload" data-src="{{ product.images.url }}" src="{{ product.images.url }}" alt="image" title="product">
+									<!-- End hover image -->
+									<!-- Variant Image-->
+									<img class="grid-view-item__image hover variantImg" src="{{ product.images.url }}" alt="image" title="product">
+									<!-- Variant Image-->
+									<!-- product label -->
+									<div class="product-labels rounded"><span class="lbl on-sale">Sale</span> <span class="lbl pr-label1">new</span></div>
+									<!-- End product label -->
+								</a>
+								<!-- end product image -->
+							
+								<!-- Start product button -->
+								<form class="variants add" action="{% url 'add_cart' product.id %}" onclick="window.location.href='{% url 'cart' %}'"method="post">
+									{% csrf_token %}
+									<button class="btn btn-addto-cart" type="button" tabindex="0">Add To Cart</button>
+								</form>
+							
+								<!-- end product button -->
+							</div>
+							<!-- end product image -->
+					
+					</div>
+					{% endfor %}
 				</div>
-			</figcaption>
+			</div>    
 		</div>
-	</div> <!-- col.// -->
-	{% endfor %}
-</div> <!-- row.// -->
+	</div>
+
+
+<div class="section">
+	<div class="hero hero--large hero__overlay bg-size">
+		<img class="bg-img" src="{% static 'images/parallax-banners/bg.jpg' %}" alt="" />
+		<div class="hero__inner">
+			<div class="container">
+				<div class="wrap-text left text-small font-bold">
+					<h2 class="h2 mega-title">Ikon perfumer<br> The best choice for your smell</h2>
+					<a href="{% url 'store' %}" class="btn">Purchase Now</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+       <!--New Arrivals-->
+	   <div class="product-rows section">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="section-header text-center">
+						<h2 class="h2">New Arrivals</h2>
+						<p>Grab these new items before they are gone!</p>
+					</div>
+				</div>
+			</div>
+			<div class="grid-products">
+				<div class="row">
+					{% for product in products %}
+					<div class="col-6 col-sm-2 col-md-3 col-lg-3 item">
+						<!-- start product image -->
+						<div class="product-image">
+							<!-- start product image -->
+							<a href="{{ product.get_url }}" class="grid-view-item__link">
+								<!-- image -->
+								<img class="primary blur-up lazyload" data-src="{{ product.images.url }}" src="{{ product.images.url }}" alt="ikon" title="product">
+								<!-- End image -->
+								<!-- Hover image -->
+								<img class="hover blur-up lazyload" data-src="{{ product.images.url }}" src="{{ product.images.url }}" alt="image" title="product">
+								<!-- End hover image -->
+								<!-- Variant Image-->
+								<img class="grid-view-item__image hover variantImg" src="{{ product.images.url }}" alt="image" title="product">
+								<!-- Variant Image-->
+							  
+							</a>
+							<!-- end product image -->
+						   <!-- Start product button -->
+							<form class="variants add" action="{% url 'add_cart' product.id %}" onclick="window.location.href='{% url 'cart' %}'"method="post">
+								{% csrf_token %}
+								<button class="btn btn-addto-cart" type="button" tabindex="0">Add To Cart</button>
+							</form>
+							
+							<!-- end product button -->
+						</div>
+						<!-- end product image -->
+						<!--start product details -->
+						<div class="product-details text-center">
+							<!-- product name -->
+							<div class="product-name">
+								<a href="{{ product.get_url }}">{{ product.product_name }}</a>
+							</div>
+							<!-- End product name -->
+							<!-- product price -->
+							<div class="product-price">
+							
+								<span class="price">₹ {{ product.price }}</span>
+							</div>
+							<!-- End product price -->
+						 
+						</div>
+						<!-- End product details -->
+					</div>
+					{% endfor %}
+				</div>
+				<div class="row">
+					<div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
+						<a href="{% url 'store' %}" class="btn">View all</a>
+					</div>
+				</div>
+			</div>
+	   </div>
+	</div>	
 
 </div><!-- container // -->
-</section>
+
 <!-- ========================= SECTION  END// ========================= -->
 
 

@@ -9,9 +9,12 @@
 
 		<!-- ============================ COMPONENT 1 ================================= -->
 		<h4 class="text-center mb-20">Review Your Order and Make Payment</h4>
+		<div class="alert alert-success text-uppercase" role="alert">
+			<i class="icon anm anm-truck-l icon-large"></i> &nbsp;<strong>Congratulations!</strong> You've got free shipping!
+		</div>
 		<div class="row">
-
-			<aside class="col-lg-8">
+		
+			<aside class="col-lg-6">
 				<div class="card">
 					<h5 class="card-header">Billing Address</h5>
 					<div class="card-body">
@@ -35,81 +38,90 @@
 
 					</div>
 				</div>
-				<div class="card">
+				
 					<h5 class="card-header">Review Products</h5>
-					<div class="card-body">
-						<table class="table table-borderless table-shopping-cart">
-							<thead class="text-muted">
-								<tr class="small text-uppercase">
-									<th scope="col">Product</th>
-									<th scope="col" width="120">Quantity</th>
-									<th scope="col" width="120">Price</th>
-
-								</tr>
-							</thead>
-							<tbody>
-
-								{% for cart_item in cart_items %}
-								<tr>
-									<td>
-										<figure class="itemside align-items-center">
-											<div class="aside"><img src="{{ cart_item.product.images.url }}" class="img-sm"></div>
-											<figcaption class="info">
-												<a href="{{ cart_item.product.get_url }}" class="title text-dark">{{ cart_item.product.product_name }}</a>
-												<p class="text-muted small">
-													{% if cart_item.variations.all %}
-													{% for item in cart_item.variations.all %}
-													{{ item.variation_category | capfirst }} : {{ item.variation_value | capfirst }} <br>
-													{% endfor %}
-													{% endif %}
-												</p>
-											</figcaption>
-										</figure>
-									</td>
-									<td>
-										<!-- col.// -->
-										<label for="">{{cart_item.quantity}}</label>
-									</td>
-									<td>
-										<div class="price-wrap">
-											<var class="price">₹ {{ cart_item.sub_total }}</var>
-											<small class="text-muted"> ₹ {{ cart_item.product.price }} each </small>
-										</div> <!-- price-wrap .// -->
-									</td>
-
-								</tr>
-								{% endfor %}
-
-							</tbody>
-						</table>
-
-					</div>
-				</div>
+					<div class="card">
+						<div class="card-body">
+					  <table class="bg-white table table-bordered table-hover text-center">
+						<thead>
+							<tr>
+								<th class="text-left">Product Name</th>
+								<th>Price</th>
+								<th>Size</th>
+								<th>Qty</th>
+								<th>Subtotal</th>
+							</tr>
+						</thead>
+				
+						<tbody>
+							{% for cart_item in cart_items %}
+							<tr>
+								<td class="text-left">{{ cart_item.product.product_name }}</td>
+								<td>₹ {{ cart_item.product.price }}</td>
+								<td>	
+									{% if cart_item.variations.all %}
+									{% for item in cart_item.variations.all %}
+										{{ item.variation_category | capfirst }} : {{ item.variation_value | capfirst }} <br>
+									{% endfor %}
+									{% endif %}
+								</td>
+								<td>{{cart_item.quantity}}</td>
+								<td>₹ {{cart_item.sub_total }}</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+						<tfoot class="font-weight-600">
+							<tr>
+								<td colspan="4" class="text-right">Shipping </td>
+								<td>₹ 00.00</td>
+							</tr>
+							<tr>
+								<td colspan="4" class="text-right">Total</td>
+								<td>₹ {{grand_total}}</td>
+							</tr>
+						</tfoot>
+					  
+					</table>
+				
+					
+						</div> <!-- card-body.// -->
+						</div>
+				
 
 			</aside> <!-- col.// -->
 			<aside class="col-lg-4">
 
 				<div class="card">
 					<div class="card-body">
-						<dl class="dlist-align">
+						<!-- <dl class="dlist-align">
 							<dt>Total price:</dt>
-							<dd class="text-right">₹ {{grand_total}}</dd>
-						</dl>
+							<dd class="text-right">₹ 
+								{% for cart_item in cart_items %}
+								{{cart_item.product.price }} <br>
+								{% endfor %}
+							</dd>
+						</dl> -->
 						<dl class="dlist-align">
-							<dt>Tax:</dt>
-							<dd class="text-right"> ₹ {{tax}}</dd>
+							<dt>Size:</dt>
+							<dd class="text-right"> 
+								{% for cart_item in cart_items %}
+								{% if cart_item.variations.all %}
+								{% for item in cart_item.variations.all %}
+							    {{ item.variation_value | capfirst }} <br>
+								{% endfor %}
+								{% endif %}
+								{% endfor %}
+							</dd>
 						</dl>
 						<dl class="dlist-align">
 							<dt>Grand Total:</dt>
 							<dd class="text-right text-dark b"><strong>₹ {{grand_total}}</strong></dd>
 						</dl>
 						<hr>
-						<p class="text-center mb-3">
-							<img src="{% static './images/misc/payments.png' %}" height="26">
-						</p>
-
+						
+						<div class="paymnet-img"><img src="{% static 'images/payment-img.jpg' %}" alt="Payment"></div>
 						<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-						<button id="rzp-button1" class="btn btn-primary ">Pay</button>
+						<button id="rzp-button1" class="btn btn-primary btn-block ">Pay</button>
 					
 
 					</div> <!-- card-body.// -->

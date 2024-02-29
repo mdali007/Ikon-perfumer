@@ -91,7 +91,7 @@ def payments(request):
 
 
 
-def place_order(request, total=0, quantity=0,):
+def place_order(request, total=0, quantity=0):
     current_user = request.user
 
     # If the cart count is less than or equal to 0, then redirect back to shop
@@ -102,20 +102,25 @@ def place_order(request, total=0, quantity=0,):
 
     grand_total = 0
 
-       
     for cart_item in cart_items:
-        # total += (cart_item.product.price * cart_item.quantity)
         quantity += cart_item.quantity
 
-        if cart_item.product.variations == 'small':
-            grand_total += cart_item.quantity * cart_item.product.price
-        elif cart_item.product.variations == 'medium':
-            grand_total += cart_item.quantity * cart_item.product.price_medium
-        else:
-            grand_total += cart_item.quantity * cart_item.product.price_large
+        # Calculate the price based on variations
+        price = cart_item.product.price
+        for variation in cart_item.variations.all():
+            if variation.variation_category == 'size':
+                if variation.variation_value == 'small':
+                    price = cart_item.product.price_small
+                elif variation.variation_value == 'medium':
+                    price = cart_item.product.price_medium
+                elif variation.variation_value == 'large':
+                    price = cart_item.product.price_large
 
-        print(grand_total)
-    # grand_total = total + tax
+        sub_total = cart_item.quantity * price
+        cart_item.sub_total = sub_total  # Assign sub_total to cart_item.sub_total
+
+    # Add this subtotal to the grand total
+        grand_total += sub_total  
 
     if request.method == 'POST':
         form = OrderForm(request.POST)
@@ -134,10 +139,14 @@ def place_order(request, total=0, quantity=0,):
             data.city = form.cleaned_data['city']
             data.order_note = form.cleaned_data['order_note']
             data.order_total = grand_total
-            # data.tax = tax
             data.ip = request.META.get('REMOTE_ADDR')
             data.save()
+
             # Generate order number
+            # current_date = datetime.now().strftime("%Y%m%d") 
+            # order_number = current_date + str(data.id)
+            # data.order_number = order_number
+            # data.save()
             yr = int(datetime.date.today().strftime('%Y'))
             dt = int(datetime.date.today().strftime('%d'))
             mt = int(datetime.date.today().strftime('%m'))
@@ -152,13 +161,14 @@ def place_order(request, total=0, quantity=0,):
                 'order': order,
                 'cart_items': cart_items,
                 'total': total,
-                # 'tax': tax,
+                'sub_total' : sub_total,
                 'grand_total': grand_total,
                 'g_total': grand_total * 100,
             }
             return render(request, 'orders/payments.html', context)
     else:
         return redirect('checkout')
+    
 
 
 def order_complete(request):
