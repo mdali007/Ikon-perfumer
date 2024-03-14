@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-!^clsw%qmq#f&6qvj++tll9bix($ou!eg6c#w^(sp_4gmlr*m+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['greatkart-course-env.eba-pepcery4.us-west-2.elasticbeanstalk.com', "*"]
+ALLOWED_HOSTS = ['django-greatkart-env.eba-xvrucm9a.us-west-2.elasticbeanstalk.com']
 
 
 # Application definition
@@ -149,9 +149,9 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-# STATIC_ROOT = BASE_DIR /'static'
+STATIC_ROOT = BASE_DIR /'static'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    'greatkart/static',
 ]
 
 # AWS S3 Static Files Configuration
@@ -189,12 +189,16 @@ MESSAGE_TAGS = {
 
 
 # SMTP configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'mds2ali007@gmail.com'
-EMAIL_HOST_PASSWORD = 'app password'
+EMAIL_HOST_USER = 'ikonperfume786@gmail.com'
+EMAIL_HOST_PASSWORD = 'gtwi hoxs nhwn qiqh'
 EMAIL_USE_TLS = True
 
 
 RAZORPAY_API_KEY = 'api_key'
 RAZORPAY_API_SECRET = 'api_secret'
+
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'

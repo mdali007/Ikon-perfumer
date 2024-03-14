@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <!--Body Content-->
+    <div id="page-content">
+    	<!--Page Title-->
+    	<div class="page section-header text-center">
+			<div class="page-title">
+        		<div class="wrapper"><h1 class="page-width">FAQs</h1></div>
+      		</div>
+		</div>
+        <div class="container">
+        	<div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 main-col">
+                	<div id="accordionExample">
+                        <h2 class="title h2">PRODUCTS</h2>
+                        <div class="faq-body">
+                            <h4 class="panel-title" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">What are Ikon perfume's personalized perfumes?</h4>
+                            <div id="collapseOne" class="collapse panel-content" data-parent="#accordionExample">Ikon perfume's Personalised perfumes provide the customers with an option to get their names, dates,
+                                short messages, etc. printed or hand engraved on the Perfume bottle.</div>
+                        </div>
+                        <div class="faq-body">
+                            <h4 class="panel-title" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Are Ikon perfume's perfumes cruelty-free?</h4>
+                            <div id="collapseTwo" class="collapse panel-content">Yes, Ikon perfume's products are 100% cruelty-free. None of our products or ingredients are tested on animals.</div>
+                        </div>
+                        <div class="faq-body">
+                            <h4 class="panel-title" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">What are Ikon perfume's customized perfumes?</h4>
+                            <div class="panel-content collapse" id="collapseThree">customized perfumes are fragrances belonging to Ikon perfume's collection that provides
+                                customers the option to select their desired concentration of perfume oil & bottle design.</div>
+                        </div>
+
+<!-- animation starts -->
+                        <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+
+                        <dotlottie-player src="https://lottie.host/38af066c-b7d6-4491-b8cd-e51c1d826145/alp1FXwKQ4.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></dotlottie-player>
+<!-- animation ends -->
+
+                        <h2 class="title h2">ORDERS & PURCHASES</h2>
+                        <div class="faq-body">
+                            <h4 class="panel-title" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Are Ikon perfume's products available on Amazon or Flipkart?</h4>
+                            <div class="panel-content collapse" id="collapseFour">"No, you can purchase Ikon perfume's products from our official website, or at any of our
+                                retail outlets."</div>
+                            </div>
+                        <div class="faq-body">
+                            <h4 class="panel-title" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">Where does it come from?</h4>
+                            <div class="panel-content collapse" id="collapseFive">"Experimenting is key. Try exploring multiple scents belonging to different scent families and varied notes.
+                                Finding your signature fragrance is more like a journey." </div>
+                           </div>
+                        <div class="faq-body">
+                            <h4 class="panel-title" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">"While making an online purchase, how can I find the right perfume without being able to smell the scents?"</h4>
+                            <div class="panel-content collapse" id="collapseSix">"Each MYOP product is followed by a detailed description of the prominent scent notes.
+                                By relating these notes to already familiar scents, customers can have a general understanding of the fragrance."</div>
+                        </div> <br><br><br>
+                    </div>
+               	</div>
+            </div>
+        </div>
+        
+    </div>
+    <!--End Body Content-->
+    
+  {% endblock %}

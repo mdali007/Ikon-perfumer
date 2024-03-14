@@ -19,8 +19,37 @@
 <!-- Main Style CSS -->
 <link rel="stylesheet" href="{% static './css/style.css' %}">
 <link rel="stylesheet" href="{% static './css/responsive.css' %}">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+<style>
+  .float{
+	position:fixed;
+	width:45px;
+	height:45px;
+	bottom:40px;
+	left:40px;
+	background-color:#25d366;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+  font-size:30px;
+	box-shadow: 2px 2px 3px #999;
+  z-index:100;
+}
+
+.my-float{
+	margin-top:10px;
+}
+
+
+</style>
 </head>
 <body class="template-index home2-default">
+
+ <a href="https://wa.me/917022674447?text=Halloo%21%21%20Ikon%20perfumer" class="float" target="_blank">
+<i class="fa fa-whatsapp my-float"></i>
+</a>
 <!-- <div id="pre-loader">
     <img src="{% static './images/loader.gif' %}" alt="Loading..." />
 </div> -->
@@ -44,7 +73,7 @@
             	<div class="col-10 col-sm-8 col-md-5 col-lg-4">
                  
                 
-                    <p class="phone-no"><i class="anm anm-phone-s"></i> +440 0(111) 044 833</p>
+                    <p class="email" style="text-transform: lowercase;"><i class="icon anm anm-envelope-l"></i>  ikonperfume786@gmail.com</p>
                 </div>
                 {% if user.id is None %}
                 <div class="col-sm-4 col-md-4 col-lg-4 d-none d-lg-none d-md-block d-lg-block">
@@ -111,9 +140,9 @@
                               	</div>
                             </li>
                     
-                        <li class="lvl1 parent dropdown"><a href="#">About Us <i class="anm anm-angle-down-l"></i></a> </li>
+                        <li class="lvl1 parent dropdown"><a href="{% url 'aboutus' %}">About Us <i class="anm anm-angle-down-l"></i></a> </li>
                      
-                        <li class="lvl1 parent dropdown"><a href="#">FAQs <i class="anm anm-angle-down-l"></i></a> </li>
+                        <li class="lvl1 parent dropdown"><a href="{% url 'faqs' %}">FAQs <i class="anm anm-angle-down-l"></i></a> </li>
                      
                         <li class="lvl1"><a href="#">Contact us <i class="anm anm-angle-down-l"></i></a></li>
                       </ul>
@@ -155,10 +184,18 @@
           {% else %}
           <li class="lvl1 parent megamenu"><a href="#"><b>Welcome {{user.first_name}}!</b></i></a></li>
           {% endif %}
-        	<li class="lvl1 parent megamenu"><a href="{% url 'home' %}">Home <i class="anm anm-plus-l"></i></a> </li>
-        	<li class="lvl1 parent megamenu"><a href="#">About Us  <i class="anm anm-plus-l"></i></a> </li>
-          <li class="lvl1 parent megamenu"><a href="#">FAQs<i class="anm anm-plus-l"></i></a></li>
-        	<li class="lvl1 parent megamenu"><a href="#">Contact us <i class="anm anm-plus-l"></i></a>
+        	<li class="lvl1 parent megamenu"><a href="{% url 'home' %}">Home <i class=""></i></a> </li>
+        	<li class="lvl1 parent megamenu"><a href="{% url 'aboutus' %}">About Us  <i class=""></i></a> </li>
+          <li class="lvl1 parent megamenu"><a href="#">Category <i class="anm anm-plus-l"></i></a>
+            <ul>
+              <li><a href="{% url 'store' %}" class="site-nav">All products</a></li>
+              {% for category in links %}
+              <li><a href="{{ category.get_url }}" class="site-nav">{{ category.category_name }}</a></li>
+              {% endfor %}
+            </ul>
+          </li>
+          <li class="lvl1 parent megamenu"><a href="{% url 'faqs' %}">FAQs<i class=""></i></a></li>
+        	<li class="lvl1 parent megamenu"><a href="#">Contact us <i class=""></i></a>
          
         </ul>
 	</div>
@@ -181,7 +218,7 @@
             <div class="footer-bottom">
               <div class="row">
                   <!--Footer Copyright-->
-                <div class="col-12 col-sm-12 col-md-12 col-lg-12 order-1 order-md-0 order-lg-0 order-sm-1 copyright text-center"><span></span> <a href="#">Ikon perfumer</a></div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 order-1 order-md-0 order-lg-0 order-sm-1 copyright text-center"><span></span> <a href="https://www.instagram.com/ikonperfumer?igsh=ZnV0eXh0cjY2a3Y1">Ikon perfumer</a></div>
                     <!--End Footer Copyright-->
                 </div>
             </div>

@@ -4,18 +4,6 @@
 {% block content %}
 
 
-<div id="page-content">
-  <!--Page Title-->
-  <div class="page section-header text-center">
-  <div class="page-title">
-        <div class="wrapper"><h1 class="page-width">Login</h1></div>
-      </div>
-</div>
-
-
-
-
-
 <!-- ============================ COMPONENT LOGIN   ================================= -->
 
 {% if request.GET.command == 'verification' %}
@@ -29,7 +17,12 @@ Already verified? <a href="{% url 'login' %}">Login</a>
 {% else %}
 
 
-	<div class="card mx-auto" style="max-width: 380px; margin-top:100px;">
+<div class="top-middle-container">
+  <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+  <dotlottie-player src="https://lottie.host/3767d65a-53a9-4699-af70-e79b2478e1a5/tTmMCBJA7W.json" background="transparent" speed="1" style="width: 370px; height: 250px;" loop autoplay></dotlottie-player>
+</div>
+
+	<div class="card mx-auto" style="max-width: 380px; margin-top:0px;">
 
       <div class="card-body">
       <h4 class="card-title mb-4">Sign in</h4>
@@ -61,3 +54,11 @@ Already verified? <a href="{% url 'login' %}">Login</a>
 
 
 {% endblock %}
+<style>
+  .top-middle-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  </style>

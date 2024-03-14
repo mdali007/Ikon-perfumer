@@ -129,10 +129,24 @@ def cart(request, total=0, quantity=0, cart_items=None):
             cart = Cart.objects.get(cart_id=_cart_id(request))
             cart_items = CartItem.objects.filter(cart=cart, is_active=True)
         for cart_item in cart_items:
-            total += (cart_item.product.price * cart_item.quantity)
             quantity += cart_item.quantity
-        tax = (2 * total)/100
-        grand_total = total + tax
+
+            # Calculate the price based on variations
+            price = cart_item.product.price
+            for variation in cart_item.variations.all():
+                if variation.variation_category == 'size':
+                    if variation.variation_value == 'small':
+                        price = cart_item.product.price_small
+                    elif variation.variation_value == 'medium':
+                        price = cart_item.product.price_medium
+                    elif variation.variation_value == 'large':
+                        price = cart_item.product.price_large
+            
+            sub_total = cart_item.quantity * price
+            cart_item.sub_total = sub_total  # Assign sub_total to cart_item.sub_total
+
+        # Add this subtotal to the grand total
+            grand_total += sub_total  
     except ObjectDoesNotExist:
         pass #just ignore
 
@@ -140,7 +154,7 @@ def cart(request, total=0, quantity=0, cart_items=None):
         'total': total,
         'quantity': quantity,
         'cart_items': cart_items,
-        'tax'       : tax,
+        'sub_total' : sub_total,
         'grand_total': grand_total,
     }
     return render(request, 'store/cart.html', context)
@@ -157,10 +171,24 @@ def checkout(request, total=0, quantity=0, cart_items=None):
             cart = Cart.objects.get(cart_id=_cart_id(request))
             cart_items = CartItem.objects.filter(cart=cart, is_active=True)
         for cart_item in cart_items:
-            total += (cart_item.product.price * cart_item.quantity)
             quantity += cart_item.quantity
-        tax = (2 * total)/100
-        grand_total = total + tax
+
+            # Calculate the price based on variations
+            price = cart_item.product.price
+            for variation in cart_item.variations.all():
+                if variation.variation_category == 'size':
+                    if variation.variation_value == 'small':
+                        price = cart_item.product.price_small
+                    elif variation.variation_value == 'medium':
+                        price = cart_item.product.price_medium
+                    elif variation.variation_value == 'large':
+                        price = cart_item.product.price_large
+            
+            sub_total = cart_item.quantity * price
+            cart_item.sub_total = sub_total  # Assign sub_total to cart_item.sub_total
+
+        # Add this subtotal to the grand total
+            grand_total += sub_total  
     except ObjectDoesNotExist:
         pass #just ignore
 
@@ -168,7 +196,7 @@ def checkout(request, total=0, quantity=0, cart_items=None):
         'total': total,
         'quantity': quantity,
         'cart_items': cart_items,
-        'tax'       : tax,
+        'sub_total' : sub_total,
         'grand_total': grand_total,
     }
     return render(request, 'store/checkout.html', context)

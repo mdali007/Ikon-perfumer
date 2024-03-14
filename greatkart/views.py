@@ -16,3 +16,9 @@ def home(request):
         'banners': banners,
     }
     return render(request, 'home.html', context)
+
+def faqs(request):
+    return render(request, 'faqs.html')
+
+def aboutus(request):
+    return render(request, 'about-us.html')
