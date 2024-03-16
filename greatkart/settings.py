@@ -27,7 +27,7 @@ SECRET_KEY = 'hkdhsk323!@#$-!^clsw%qmq#f&6qvj++tll9bix($ou!eg6c#w^(sp_4gmlr*m+'
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['django-greatkart-env.eba-xvrucm9a.us-west-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['django-greatkart-env.eba-xvrucm9a.us-west-2.elasticbeanstalk.com', '172.31.41.33']
 
 
 # Application definition
