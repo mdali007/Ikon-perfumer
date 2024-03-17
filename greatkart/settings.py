@@ -22,12 +22,12 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'hkdhsk323!@#$-!^clsw%qmq#f&6qvj++tll9bix($ou!eg6c#w^(sp_4gmlr*m+'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['django-greatkart-env.eba-xvrucm9a.us-west-2.elasticbeanstalk.com', '172.31.41.33']
+ALLOWED_HOSTS = ['django-greatkart-env.eba-xvrucm9a.us-west-2.elasticbeanstalk.com', "*"]
 
 
 # Application definition
