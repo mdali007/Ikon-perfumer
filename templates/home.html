@@ -12,11 +12,13 @@
 
 	<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 		<div class="carousel-inner">
-		  {% for banner in banners %}
+		 
 		  <div class="carousel-item {% if forloop.first %}active{% endif %} ">
-			<img class="d-block w-100" src="{{ banner.ban_image.url }}" alt="{{ banner.ban_heading }}">
+			<img class="d-block w-100" src="{% static 'images/b1.jpg' %}" alt="{{ banner.ban_heading }}">
 		  </div>
-		  {% endfor %}
+		  <div class="carousel-item {% if forloop.first %}active{% endif %} ">
+			<img class="d-block w-100" src="{% static 'images/b2.jpg' %}" alt="{{ banner.ban_heading }}">
+		  </div>
 		</div>
 		<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
 		  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
