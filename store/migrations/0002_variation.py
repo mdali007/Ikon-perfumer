@@ -19,7 +19,6 @@ class Migration(migrations.Migration):
                 ('variation_value', models.CharField(max_length=100)),
                 ('is_active', models.BooleanField(default=True)),
                 ('created_date', models.DateTimeField(auto_now=True)),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='store.product')),
             ],
         ),
     ]

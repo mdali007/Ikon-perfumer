@@ -7,9 +7,9 @@ from .models import Product, Variation, ReviewRating, ProductGallery
 #     extra = 1
 
 class VariationAdmin(admin.ModelAdmin):
-    list_display = ('product', 'variation_category', 'variation_value', 'is_active')
+    list_display = ('variation_category', 'variation_value', 'is_active')
     list_editable = ('is_active',)
-    list_filter = ('product', 'variation_category', 'variation_value')
+    list_filter = ('variation_category', 'variation_value')
 
 
 class ProductAdmin(admin.ModelAdmin):
