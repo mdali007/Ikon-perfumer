@@ -3,9 +3,7 @@
 Hi {{user.first_name}},
 
 Please click on below link to confirm your registration.
-<!-- http://{{domain}}{% url 'activate' uidb64=uid token=token %} -->
-
-<a href="http://{{domain}}{% url 'activate' uidb64=uid token=token %}" style="background-color: #4CAF50; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 8px;">Confirm Registration</a>
+http://{{domain}}{% url 'activate' uidb64=uid token=token %}
 
 
 If you think it's not you, please ignore this email.
