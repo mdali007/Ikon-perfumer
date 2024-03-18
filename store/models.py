@@ -14,7 +14,7 @@ class Product(models.Model):
     images          = models.ImageField(upload_to='photos/products')
     stock           = models.IntegerField()
     is_available    = models.BooleanField(default=True)
-    variations = models.ManyToManyField('Variation', related_name='product_variations')
+    variations = models.ManyToManyField('Variation', related_name='product_variations', null=True, blank=True,)
 
     category        = models.ForeignKey(Category, on_delete=models.CASCADE)
     created_date    = models.DateTimeField(auto_now_add=True)
@@ -56,7 +56,7 @@ variation_category_choice = (
 )
 
 class Variation(models.Model):
-    # product = models.ForeignKey(default='aqua', null=True, blank=True)
+    product = models.ForeignKey(Product, null=True, blank=True, on_delete=models.CASCADE,)
     variation_category = models.CharField(max_length=100, choices=variation_category_choice)
     variation_value = models.CharField(max_length=100)
     is_active = models.BooleanField(default=True)
