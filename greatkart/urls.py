@@ -28,6 +28,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('faqs/', views.faqs, name='faqs'),
     path('aboutus/', views.aboutus, name='aboutus'),
+    path('contactus/', views.contactus, name='contactus'),
 
     # ORDERS
     path('orders/', include('orders.urls')),

@@ -22,3 +22,6 @@ def faqs(request):
 
 def aboutus(request):
     return render(request, 'about-us.html')
+
+def contactus(request):
+    return render(request, 'contact-us.html')
