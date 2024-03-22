@@ -56,7 +56,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_session_timeout.middleware.SessionTimeoutMiddleware',
-    'django.middleware.redirect.RedirectLikeMiddleware',
+    # 'django.middleware.redirect.RedirectLikeMiddleware',
 ]
 
 SESSION_EXPIRE_SECONDS = 3600  # 1 hour
