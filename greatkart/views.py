@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from store.models import Product, ReviewRating
-from category.models import Banner
+from category.models import Banner,Category
 
 def home(request):
     products = Product.objects.all().filter(is_available=True).order_by('created_date')
     banners = Banner.objects.all()
+    category = Category.objects.all()
     # Get the reviews
     reviews = None
     for product in products:
@@ -14,6 +15,7 @@ def home(request):
         'products': products,
         'reviews': reviews,
         'banners': banners,
+        'category': category,
     }
     return render(request, 'home.html', context)
 

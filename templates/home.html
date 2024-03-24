@@ -99,7 +99,26 @@
 		</div>
 	</div>
 </div>
-
+<div class="section imgBanners">
+        	<div class="imgBnrOuter">
+            	<div class="container-fluid">
+                	<div class="row">
+						{% for category in links %}
+                    	<div class="col-12 col-sm-12 col-md-12 col-lg-6 pl-0 image-banner-1">
+                        	<div class="inner topleft">
+                            	<a href="{{ category.get_url }}">	
+                               		<img src="{{ category.cat_image.url }}" alt="ikon" title="ikon" class="blur-up lazyload" />
+                                    <div class="ttl">
+                                    	<h3>{{ category.category_name }}</h3>  <b>Explore Now </b><i class="anm anm-long-arrow-right"></i>
+                                    </div>
+                                </a>
+                             </div>
+                        </div>
+						{% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
        <!--New Arrivals-->
 	   <div class="product-rows section">
 		<div class="container">

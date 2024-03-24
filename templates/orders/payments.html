@@ -152,10 +152,10 @@ var url = "{% url 'payments' %}";
 var redirect_url = "{% url 'order_complete' %}";
 
 var options = {
-    key: 'rzp_test_TVd3QA50GTCz8n',
+    key:  '{{razorpay_key}}',
     amount: amount,
     currency: 'INR',
-    name: 'Your Store',
+    name: 'Ikon Perfumer',
     description: 'Payment for Order #' + orderID,
     image: '/your_logo.png',
     order_id: '{{ razorpay_order.id }}',

@@ -157,6 +157,7 @@ def place_order(request, total=0, quantity=0):
             data.save()
 
             order = Order.objects.get(user=current_user, is_ordered=False, order_number=order_number)
+            razorpay_key = settings.RAZORPAY_API_KEY
             context = {
                 'order': order,
                 'cart_items': cart_items,
@@ -164,6 +165,7 @@ def place_order(request, total=0, quantity=0):
                 'sub_total' : sub_total,
                 'grand_total': grand_total,
                 'g_total': grand_total * 100,
+                'razorpay_key' : razorpay_key,
             }
             return render(request, 'orders/payments.html', context)
     else:
