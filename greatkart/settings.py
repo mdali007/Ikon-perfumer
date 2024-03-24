@@ -175,7 +175,7 @@ STATICFILES_DIRS = [
 # STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-# DEFAULT_FILE_STORAGE = 'greatkart.media_storages.MediaStorage'
+DEFAULT_FILE_STORAGE = 'greatkart.media_storages.MediaStorage'
 
 # media files configuration
 MEDIA_URL = '/media/'
@@ -205,3 +205,6 @@ RAZORPAY_API_SECRET = config('RAZORPAY_API_SECRET')
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+# s3acceskey ='AKIAQ3EGTTR4CNA3R5C3'
+# s3secretkey = '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'
