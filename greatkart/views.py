@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from store.models import Product, ReviewRating
+from store.models import Product
 from category.models import Banner,Category
 
 def home(request):
@@ -7,13 +7,12 @@ def home(request):
     banners = Banner.objects.all()
     category = Category.objects.all()
     # Get the reviews
-    reviews = None
-    for product in products:
-        reviews = ReviewRating.objects.filter(product_id=product.id, status=True)
+    # reviews = None
+    # for product in products:
+    #     reviews = ReviewRating.objects.filter(product_id=product.id, status=True)
 
     context = {
         'products': products,
-        'reviews': reviews,
         'banners': banners,
         'category': category,
     }
