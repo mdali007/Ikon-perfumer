@@ -23,5 +23,5 @@ class ProductAdmin(admin.ModelAdmin):
 admin.site.register(Variation, VariationAdmin)
 admin.site.register(ProductGallery)
 admin.site.register(Product, ProductAdmin)
-# admin.site.register(ReviewRating)
+admin.site.register(ReviewRating)
 
