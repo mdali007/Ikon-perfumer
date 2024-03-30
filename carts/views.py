@@ -135,11 +135,11 @@ def cart(request, total=0, quantity=0, cart_items=None):
             price = cart_item.product.price
             for variation in cart_item.variations.all():
                 if variation.variation_category == 'size':
-                    if variation.variation_value == 'small':
+                    if variation.variation_value == '30 ml':
                         price = cart_item.product.price_small
-                    elif variation.variation_value == 'medium':
+                    elif variation.variation_value == '50 ml':
                         price = cart_item.product.price_medium
-                    elif variation.variation_value == 'large':
+                    elif variation.variation_value == '100 ml':
                         price = cart_item.product.price_large
             
             sub_total = cart_item.quantity * price
@@ -177,11 +177,11 @@ def checkout(request, total=0, quantity=0, cart_items=None):
             price = cart_item.product.price
             for variation in cart_item.variations.all():
                 if variation.variation_category == 'size':
-                    if variation.variation_value == 'small':
+                    if variation.variation_value == '30 ml':
                         price = cart_item.product.price_small
-                    elif variation.variation_value == 'medium':
+                    elif variation.variation_value == '50 ml':
                         price = cart_item.product.price_medium
-                    elif variation.variation_value == 'large':
+                    elif variation.variation_value == '100 ml':
                         price = cart_item.product.price_large
             
             sub_total = cart_item.quantity * price
