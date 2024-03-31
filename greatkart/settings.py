@@ -91,34 +91,17 @@ AUTH_USER_MODEL = 'accounts.Account'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-# Database Configuration
+# Database os.environ.geturation
 # if 'RDS_DB_NAME' in os.environ:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql',
-#             'NAME': os.environ['RDS_DB_NAME'],
-#             'USER': os.environ['RDS_USERNAME'],
-#             'PASSWORD': os.environ['RDS_PASSWORD'],
-#             'HOST': os.environ['RDS_HOSTNAME'],
-#             'PORT': os.environ['RDS_PORT'],
-#         }
-#     }
-# else:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.sqlite3',
-#             'NAME': BASE_DIR / 'db.sqlite3',
-#         }
-#     }
-if config('RDS_DB_NAME', default=None):
+if os.environ.get('APP_ENV')=='production':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': config('RDS_DB_NAME'),
-            'USER': config('RDS_USERNAME'),
-            'PASSWORD': config('RDS_PASSWORD'),
-            'HOST': config('RDS_HOSTNAME'),
-            'PORT': config('RDS_PORT'),
+            'NAME': os.environ.get('RDS_DB_NAME'),
+            'USER': os.environ.get('RDS_USERNAME'),
+            'PASSWORD': os.environ.get('RDS_PASSWORD'),
+            'HOST': os.environ.get('RDS_HOSTNAME'),
+            'PORT': os.environ.get('RDS_PORT'),
         }
     }
 else:
@@ -128,6 +111,24 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+# if os.environ.get('RDS_DB_NAME', default=None):
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql',
+#             'NAME': os.environ.get('RDS_DB_NAME'),
+#             'USER': os.environ.get('RDS_USERNAME'),
+#             'PASSWORD': os.environ.get('RDS_PASSWORD'),
+#             'HOST': os.environ.get('RDS_HOSTNAME'),
+#             'PORT': os.environ.get('RDS_PORT'),
+#         }
+#     }
+# else:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': BASE_DIR / 'db.sqlite3',
+#         }
+#     }
 
 
 
@@ -174,10 +175,10 @@ STATICFILES_DIRS = [
     'greatkart/static',
 ]
 
-# AWS S3 Static Files Configuration
-AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+# AWS S3 Static Files os.environ.geturation
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
@@ -194,7 +195,7 @@ AWS_DEFAULT_ACL = 'public-read'
 
 DEFAULT_FILE_STORAGE = 'greatkart.media_storages.MediaStorage'
 
-# media files configuration
+# media files os.environ.geturation
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR /'media'
 
@@ -208,17 +209,17 @@ MESSAGE_TAGS = {
 }
 
 
-# SMTP configuration
+# SMTP os.environ.geturation
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = config('EMAIL_HOST')
-EMAIL_PORT = config('EMAIL_PORT', cast=int)  # Specify the expected type
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = os.environ.get('EMAIL_PORT', cast=int)  # Specify the expected type
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', cast=bool)
 
 
-RAZORPAY_API_KEY = config('RAZORPAY_API_KEY')
-RAZORPAY_API_SECRET = config('RAZORPAY_API_SECRET')
+RAZORPAY_API_KEY = os.environ.get('RAZORPAY_API_KEY')
+RAZORPAY_API_SECRET = os.environ.get('RAZORPAY_API_SECRET')
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
