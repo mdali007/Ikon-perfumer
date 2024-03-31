@@ -93,7 +93,7 @@ AUTH_USER_MODEL = 'accounts.Account'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 # Database Configuration
 # if 'RDS_DB_NAME' in config:
-if hasattr(config, 'RDS_DB_NAME'):
+if config('RDS_DB_NAME') is not None:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
