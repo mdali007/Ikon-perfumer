@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'hkdhsk323!@#$-!^clsw%qmq#f&6qvj++tll9bix($ou!eg6c#w^(sp_4gml'
+SECRET_KEY = config('SECRET_KEY')
 
 
 DEBUG = True
@@ -91,35 +91,16 @@ AUTH_USER_MODEL = 'accounts.Account'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-# Database os.environ.geturation
+# Database Configuration
 # if 'RDS_DB_NAME' in os.environ:
-if os.environ.get('APP_ENV')=='production':
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.environ.get('RDS_DB_NAME'),
-            'USER': os.environ.get('RDS_USERNAME'),
-            'PASSWORD': os.environ.get('RDS_PASSWORD'),
-            'HOST': os.environ.get('RDS_HOSTNAME'),
-            'PORT': os.environ.get('RDS_PORT'),
-        }
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-# if os.environ.get('RDS_DB_NAME', default=None):
 #     DATABASES = {
 #         'default': {
 #             'ENGINE': 'django.db.backends.postgresql',
-#             'NAME': os.environ.get('RDS_DB_NAME'),
-#             'USER': os.environ.get('RDS_USERNAME'),
-#             'PASSWORD': os.environ.get('RDS_PASSWORD'),
-#             'HOST': os.environ.get('RDS_HOSTNAME'),
-#             'PORT': os.environ.get('RDS_PORT'),
+#             'NAME': os.environ['RDS_DB_NAME'],
+#             'USER': os.environ['RDS_USERNAME'],
+#             'PASSWORD': os.environ['RDS_PASSWORD'],
+#             'HOST': os.environ['RDS_HOSTNAME'],
+#             'PORT': os.environ['RDS_PORT'],
 #         }
 #     }
 # else:
@@ -129,6 +110,24 @@ else:
 #             'NAME': BASE_DIR / 'db.sqlite3',
 #         }
 #     }
+if config('RDS_DB_NAME', default=None):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': config('RDS_DB_NAME'),
+            'USER': config('RDS_USERNAME'),
+            'PASSWORD': config('RDS_PASSWORD'),
+            'HOST': config('RDS_HOSTNAME'),
+            'PORT': config('RDS_PORT'),
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 
@@ -175,27 +174,10 @@ STATICFILES_DIRS = [
     'greatkart/static',
 ]
 
-# AWS S3 Static Files os.environ.geturation
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
-}
-AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL = 'public-read'
-# AWS_LOCATION = 'static'
-
-# STATICFILES_DIRS = [
-#     'greatkart/static',
-# ]
-# STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 DEFAULT_FILE_STORAGE = 'greatkart.media_storages.MediaStorage'
 
-# media files os.environ.geturation
+# media files configuration
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR /'media'
 
@@ -209,17 +191,17 @@ MESSAGE_TAGS = {
 }
 
 
-# SMTP os.environ.geturation
+# SMTP configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.environ.get('EMAIL_HOST')
-EMAIL_PORT = os.environ.get('EMAIL_PORT')  # Specify the expected type
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT', cast=int)  # Specify the expected type
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
 
 
-RAZORPAY_API_KEY = os.environ.get('RAZORPAY_API_KEY')
-RAZORPAY_API_SECRET = os.environ.get('RAZORPAY_API_SECRET')
+RAZORPAY_API_KEY = config('RAZORPAY_API_KEY')
+RAZORPAY_API_SECRET = config('RAZORPAY_API_SECRET')
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
