@@ -212,10 +212,10 @@ MESSAGE_TAGS = {
 # SMTP os.environ.geturation
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.environ.get('EMAIL_HOST')
-EMAIL_PORT = os.environ.get('EMAIL_PORT', cast=int)  # Specify the expected type
+EMAIL_PORT = os.environ.get('EMAIL_PORT')  # Specify the expected type
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', cast=bool)
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
 
 
 RAZORPAY_API_KEY = os.environ.get('RAZORPAY_API_KEY')
