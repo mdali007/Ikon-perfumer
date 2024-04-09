@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['django-greatkart-env.eba-xvrucm9a.us-west-2.elasticbeanstalk.com', "*"]
+ALLOWED_HOSTS = ['ikonperfumer.com','www.ikonperfumer.com']
 
 
 # Application definition
@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'store',
     'carts',
     'orders',
-    'storages',
 ]
 
 MIDDLEWARE = [
@@ -110,7 +109,7 @@ AUTH_USER_MODEL = 'accounts.Account'
 #             'NAME': BASE_DIR / 'db.sqlite3',
 #         }
 #     }
-if config('RDS_DB_NAME', default=None):
+if config('APP_ENV')=='production':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -168,11 +167,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 
-STATIC_URL = 'https://ikonperfumer.com/static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR /'static'
 STATICFILES_DIRS = [
     'greatkart/static',
 ]
+
 
 
 DEFAULT_FILE_STORAGE = 'greatkart.media_storages.MediaStorage'
