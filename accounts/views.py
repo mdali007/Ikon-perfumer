@@ -13,12 +13,13 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
+from django.views.decorators.csrf import csrf_protect
 
 from carts.views import _cart_id
 from carts.models import Cart, CartItem
 import requests
 
-
+@csrf_protect
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)

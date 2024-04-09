@@ -27,8 +27,11 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['ikonperfumer.com','www.ikonperfumer.com']
+ALLOWED_HOSTS = ['ikonperfumer.com','www.ikonperfumer.com','127.0.0.1']
 
+# CSRF_TRUSTED_ORIGINS = [
+#     'https://www.ikonperfumer.com',
+# ]
 
 # Application definition
 
